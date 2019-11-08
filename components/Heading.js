@@ -5,7 +5,7 @@ class Heading extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.text}> Photos </Text>
+                <Text style={styles.text}> InstaGeram </Text>
             </View>
         );
     }

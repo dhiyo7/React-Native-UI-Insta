@@ -1,8 +1,33 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Image } from 'react-native'
+import { Text, StyleSheet, View, Image, TouchableWithoutFeedback } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 class PhotoSection extends Component {
+
+
+    state={
+        heartIcon:'ios-heart-empty',
+        like:false
+    }
+
+    toggleLike=() =>{
+        this.setState({
+            like: !this.state.like
+        })  
+
+        if (this.state.like) {
+            this.setState({
+                heartIcon:'ios-heart'
+            })
+            
+        } else {
+            this.setState({
+                heartIcon:'ios-heart-empty'
+            })
+            
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -19,8 +44,16 @@ class PhotoSection extends Component {
                 </View>
 
                 {/* Ion Icon  */}
-                <View>
-                    <Icon name="ios-heart-empty" size={32} style={styles.Heart}/>
+                <View style={styles.heartContainer}>
+                    <TouchableWithoutFeedback onPress={this.toggleLike}>
+                    <Icon name={this.state.heartIcon} size={32} style={{color: this.state.heartIcon === 'ios-heart-empty' ? 'black' : 'red'}}/>
+                    </TouchableWithoutFeedback>
+                </View>
+
+                {/* Username & Hastag */}
+                <View style={styles.imgMetadata}>
+                    <Text style={styles.metaUsername}>Dhiyo7</Text>
+                    <Text style={styles.hastag}>#holiday,#Roam</Text>
                 </View>
             </View>
         )
@@ -45,20 +78,36 @@ const styles = StyleSheet.create({
         height:40,
         borderRadius:25,
     },
+
     Username:{
         paddingLeft:7,
         fontWeight:'bold',
         fontSize:10,
         letterSpacing:1
     },
+
     PhotosFeed:{
         width:null,
         height:250,
     },
+
     Heart:{
         marginLeft:10,
-        padding: 5
+    },
 
+    imgMetadata:{
+        flexDirection:'row'
+    },
+    metaUsername:{
+        marginLeft:10,
+        fontWeight:'bold'
+    },
+    hastag:{
+        marginLeft:10,
+        color:'#3d4aff'
+    },
+    heartContainer:{
+        paddingVertical:12
     }
 })
 

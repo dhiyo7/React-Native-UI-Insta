@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, ScrollView } from 'react-native'
 import PhotoSection from './PhotoSection'
 
 export default class PhotoList extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <PhotoSection/>
-            </View>
+                
+            </ScrollView>
         );
     }
 }
@@ -15,5 +16,6 @@ export default class PhotoList extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        marginBottom: 10
     }
 })

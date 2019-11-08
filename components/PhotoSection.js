@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Image, TouchableWithoutFeedback } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
+import Feather from 'react-native-vector-icons/Feather'
+
 
 class PhotoSection extends Component {
 
@@ -34,26 +37,28 @@ class PhotoSection extends Component {
 
                 {/* Username Section */}
                 <View style={styles.thumbnailSection}>
-                    <Image source={{uri: "https://i.pravatar.cc/400?img=1"}} style={styles.thumbnail}></Image>
-                    <Text style={styles.Username}> PhotoSection </Text>
+                    <Image source={{uri: this.props.detail.user_avatar}} style={styles.thumbnail}></Image>
+                    <Text style={styles.Username}> {this.props.detail.username} </Text>
                 </View>
 
                 {/* Photo Feed Section */}
                 <View>
-                    <Image source={{uri: "https://images.unsplash.com/photo-1553174241-0b28d763cafa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"}} style={styles.PhotosFeed}/>
+                    <Image source={{uri: this.props.detail.image}} style={styles.PhotosFeed}/>
                 </View>
 
                 {/* Ion Icon  */}
                 <View style={styles.heartContainer}>
                     <TouchableWithoutFeedback onPress={this.toggleLike}>
-                    <Icon name={this.state.heartIcon} size={32} style={{color: this.state.heartIcon === 'ios-heart-empty' ? 'black' : 'red'}}/>
+                    <Icon name={this.state.heartIcon} size={32} style={{marginLeft:10, color: this.state.heartIcon === 'ios-heart-empty' ? 'black' : 'red'}}/>
                     </TouchableWithoutFeedback>
+                    <EvilIcons name='comment' size={33}/>
+                    <Feather name='send' size={32} style={styles.send}/>
                 </View>
 
                 {/* Username & Hastag */}
                 <View style={styles.imgMetadata}>
-                    <Text style={styles.metaUsername}>Dhiyo7</Text>
-                    <Text style={styles.hastag}>#holiday,#Roam</Text>
+                    <Text style={styles.metaUsername}>{this.props.detail.username}</Text>
+                    <Text style={styles.hastag}>{this.props.detail.caption}</Text>
                 </View>
             </View>
         )
@@ -63,6 +68,8 @@ class PhotoSection extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        backgroundColor:'#f1f2f6',
+        paddingBottom: 5,
     },
 
     thumbnailSection:{
@@ -107,7 +114,12 @@ const styles = StyleSheet.create({
         color:'#3d4aff'
     },
     heartContainer:{
-        paddingVertical:12
+        paddingVertical:12,
+        flexDirection:'row'
+    },
+    send:{
+        opacity:5,
+        color:'#000'
     }
 })
 
